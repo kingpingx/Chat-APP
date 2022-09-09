@@ -11,6 +11,8 @@ namespace TCP_Cient
     class Program
     {
         private static bool isClientActive = true;
+        private static string User2_IP = "";
+        private static int User2_Port, User1_Port;
 
         static void send()
         {
@@ -21,7 +23,7 @@ namespace TCP_Cient
                 NetworkStream stream = null;
                 try
                 {
-                    client = new TcpClient("192.168.2.37", 1302);
+                    client = new TcpClient(User2_IP, User2_Port);
                     stream = client.GetStream();
                     while (isClientActive)
                     {
@@ -65,7 +67,7 @@ namespace TCP_Cient
                 NetworkStream stream = null;
                 try
                 {
-                    listener = new TcpListener(IPAddress.Any, 1301);
+                    listener = new TcpListener(IPAddress.Any, User1_Port);
                     listener.Start();
                     //Console.WriteLine("Waiting for a connection.");
                     client = listener.AcceptTcpClient();
